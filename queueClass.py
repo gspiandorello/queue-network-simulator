@@ -12,4 +12,4 @@ class Queue:
         # self.network = network
         self.clients = 0
         self.losses = 0
-        self.timeAtService = [0] * (self.capacity + 1)
+        self.accumulatedTimes = [0] * (self.capacity + 1)

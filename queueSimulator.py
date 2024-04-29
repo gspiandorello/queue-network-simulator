@@ -19,7 +19,7 @@ class queueSimulator:
 
     def accumulateTime(self, eventTime):
         scheduleState = len(self.schedule)
-        self.queue.timeAtService[scheduleState] += (
+        self.queue.accumulatedTimes[scheduleState] += (
             eventTime - self.times)
         self.times = eventTime
 
@@ -69,9 +69,9 @@ class queueSimulator:
 
         print("Simulation Results:")
         for i in range(self.queue.capacity + 1):
-            probability = self.queue.timeAtService[i] / self.times * 100
+            probability = self.queue.accumulatedTimes[i] / self.times * 100
             print(f"State {i}: Accumulated time {
-                self.queue.timeAtService[i]:.4f}, Probability {probability:.2f}%")
+                self.queue.accumulatedTimes[i]:.4f}, Probability {probability:.2f}%")
 
         print(f"Lost customers: {self.queue.losses}")
         print(f"Total simulation time: {self.times:.4f}\n")
