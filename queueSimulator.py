@@ -2,11 +2,11 @@ from randomGenerator import PseudoRandomNumberGenerator
 
 
 class queueSimulator:
-    def __init__(self, quantityRandomNumbers, seed, firstArrivalTime, queueList):
+    def __init__(self, firstArrivalTime, quantityRandomNumbers, seed, queueList):
+        self.firstArrivalTime = firstArrivalTime
         self.randomNumbers = PseudoRandomNumberGenerator(
             quantityRandomNumbers, seed).generate()
         self.quantityRandomNumbers = quantityRandomNumbers
-        self.firstArrivalTime = firstArrivalTime
         self.times = 0
         self.usedRandomNumbers = 0
         self.queueList = queueList
@@ -77,11 +77,15 @@ class queueSimulator:
         if destination == 'departure':
             self.eventSchedule('departure', queue)
         else:
-            queue2 = ''
+            queue2 = None
             for queue in self.queueList:
                 if queue.name == destination:
                     queue2 = queue
+                    break
+            if (queue2):
                 self.eventSchedule('passage', queue, queue2)
+            else:
+                print(f"Destination queue {destination} not found.")
 
     def chooseDestination(self, queue, probability):
         aux = 0
@@ -155,11 +159,11 @@ class queueSimulator:
             elif event.get('eventType') == 'departure':
                 self.processDeparture(event.get('queue'))
 
-        print("Simulation Results:")
-        for i in range(self.queue.capacity + 1):
-            probability = self.queue.accumulatedTimes[i] / self.times * 100
-            print(f"State {i}: Accumulated time {
-                self.queue.accumulatedTimes[i]:.4f}, Probability {probability:.2f}%")
+        # print("Simulation Results:")
+        # for i in range(self.queue.capacity + 1):
+        #     probability = self.queue.accumulatedTimes[i] / self.times * 100
+        #     print(f"State {i}: Accumulated time {
+        #         self.queue.accumulatedTimes[i]:.4f}, Probability {probability:.2f}%")
 
-        print(f"Lost customers: {self.queue.losses}")
-        print(f"Total simulation time: {self.times:.4f}\n")
+        # print(f"Lost customers: {self.queue.losses}")
+        # print(f"Total simulation time: {self.times:.4f}\n")
