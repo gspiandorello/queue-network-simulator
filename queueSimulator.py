@@ -164,7 +164,7 @@ class queueSimulator:
     def printQueueStates(self, queue):
         for index, time in enumerate(queue.accumulatedTimes):
             if time > 0:
-                probability = round((time / self.times) * 100, 4)
+                probability = round((time / self.times) * 100, 2)
                 print(f"State: {index}, Time: {
                       round(time, 4)}, Probability: {probability}%")
         print(f"\nNumber of losses: {queue.losses}")
