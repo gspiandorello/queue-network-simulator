@@ -156,7 +156,7 @@ class queueSimulator:
             f"Queue: {queue.name} (G/G/{queue.servers}{capacityDisplay})\n"
             f"{arrivalDisplay}"
             f"Service: {queue.minService}...{queue.maxService}\n"
-            f"*****************************************************************"
+            f"*****************************************************************\n"
         )
         print(queueInfo)
         self.printQueueStates(queue)
