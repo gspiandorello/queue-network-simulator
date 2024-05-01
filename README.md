@@ -14,7 +14,27 @@ The Queue Network Simulator is a powerful tool designed to simulate various netw
 The simulator initializes with a set of parameters defined in a YAML configuration file, which includes the number of servers, queue capacities, arrival and service times, and routing probabilities between queues. The simulation progresses through events such as arrivals, services, and transitions between queues, based on generated pseudo-random numbers and the defined network structure.
 
 ## Usage
-To use the simulator, define your network configuration in a YAML file according to the example provided. Ensure all dependencies are installed, and run the simulation script via a Python environment.
+To run the Queue Network Simulator, you need a Python environment. Follow these steps to set up and execute the simulation:
+
+1. **Install Python**:
+   Ensure that Python is installed on your system. You can download Python from [python.org](https://www.python.org/downloads/).
+
+2. **Install Dependencies**:
+   Before running the simulator, you need to install the necessary Python package `pyyaml` which is used to handle the YAML configuration files. Install it using pip:
+
+   ```bash
+   pip install pyyaml
+   ```
+
+3. **Running the Simulation**:
+   Once the dependencies are installed, you can run the simulation by executing the run.py script that starts the simulation process. Run it using the following command in your terminal:
+   
+   ```bash
+   python run.py
+   ```
+
+   Make sure your YAML configuration file (config.yaml) is correctly set up as described in the Example section.
+   The above steps will prepare your environment for running the Queue Network Simulator effectively.
 
 ## Example:
 ```yaml
