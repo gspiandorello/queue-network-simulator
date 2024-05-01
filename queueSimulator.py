@@ -24,7 +24,6 @@ class queueSimulator:
                 event.get('eventTime') - self.times)
 
     def processArrival(self, queue):
-        # self.accumulateTime(eventTime)
         if queue.clients < queue.capacity:
             queue.clients += 1
             if queue.clients <= queue.servers:
@@ -144,19 +143,33 @@ class queueSimulator:
 
     def printResults(self):
         for queue in self.queueList:
-            print(f'\n*****************************************************************')
-            print(f'Queue: {
-                queue.name} (G/G/{queue.servers}/{queue.capacity if queue.capacity != 999999 else ''})')
-            if queue.minArrival != -1 and queue.maxArrival != -1:
-                print(f'Arrival: {queue.minArrival}...{queue.maxArrival}')
-            print(f'Service: {queue.minService}...{queue.maxService}')
-            print(f'*****************************************************************')
-            for index in range(len(queue.accumulatedTimes)):
-                if queue.accumulatedTimes[index] > 0:
-                    print(f'State: {index}, Time: {round(queue.accumulatedTimes[index], 4)}, Probability: {
-                        round((queue.accumulatedTimes[index]/self.times)*100, 4)}%')
-            print(f'\nNumber of losses: {queue.losses}')
+            self.printQueueInfo(queue)
+        self.printSimulationSummary()
 
-        print(f'\n=================================================================')
-        print(f'Simulation average time: {round(self.times, 4)}')
-        print(f'=================================================================')
+    def printQueueInfo(self, queue):
+        capacityDisplay = f"/{
+            queue.capacity}" if queue.capacity != 999999 else ""
+        arrivalDisplay = f"Arrival: {queue.minArrival}...{
+            queue.maxArrival}\n" if queue.minArrival != -1 and queue.maxArrival != -1 else ""
+        queueInfo = (
+            f"\n*****************************************************************\n"
+            f"Queue: {queue.name} (G/G/{queue.servers}{capacityDisplay})\n"
+            f"{arrivalDisplay}"
+            f"Service: {queue.minService}...{queue.maxService}\n"
+            f"*****************************************************************"
+        )
+        print(queueInfo)
+        self.printQueueStates(queue)
+
+    def printQueueStates(self, queue):
+        for index, time in enumerate(queue.accumulatedTimes):
+            if time > 0:
+                probability = round((time / self.times) * 100, 4)
+                print(f"State: {index}, Time: {
+                      round(time, 4)}, Probability: {probability}%")
+        print(f"\nNumber of losses: {queue.losses}")
+
+    def printSimulationSummary(self):
+        print(f"\n=================================================================")
+        print(f"Simulation average time: {round(self.times, 4)}")
+        print(f"=================================================================")

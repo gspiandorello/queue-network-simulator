@@ -12,7 +12,6 @@ def validateYamlFile(yamlData):
         if param not in yamlData:
             raise ValueError(f"Missing required config parameter: {param}")
 
-        # Adicionalmente, verifica se os tipos são adequados
         if param == 'quantityRandomNumbers' and not isinstance(yamlData[param], int):
             raise TypeError(f"'{param}' must be an integer, got {
                             type(yamlData[param])} instead.")
@@ -20,11 +19,10 @@ def validateYamlFile(yamlData):
             raise TypeError(f"'seed' must be an integer, got {
                             type(yamlData['seed'])} instead.")
 
-    # Validação dos dados da fila
     if 'queueList' not in yamlData:
         raise ValueError("Missing 'queueList' in configuration.")
     queueData = yamlData['queueList']
-    # Reutiliza a função existente para validar dados específicos da fila
+
     validateQueueData(queueData)
 
 
