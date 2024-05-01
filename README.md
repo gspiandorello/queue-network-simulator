@@ -36,7 +36,12 @@ To run the Queue Network Simulator, you need a Python environment. Follow these 
    Make sure your YAML configuration file (config.yaml) is correctly set up as described in the Example section.
    The above steps will prepare your environment for running the Queue Network Simulator effectively.
 
-## Example:
+## Example
+This example demonstrates how to configure the YAML file for the simulation. Not all attributes are mandatory for each queue:
+- **Capacity**: If a queue has infinite capacity, omit the `capacity` field.
+- **Arrivals**: If no specific arrival times are defined, omit the `minArrival` and `maxArrival` fields.
+- **Network Routing**: If a queue does not route to other queues, you can omit the `network` section. For queues that do have routing, any probability total less than 1 is assumed to account for the possibility of leaving the queueing network. The remaining probability implicitly represents the exit probability.
+
 ```yaml
 configfile:
   firstArrivalTime: [["Q1", 2.0]]
