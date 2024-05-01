@@ -80,9 +80,9 @@ class queueSimulator:
     def chooseDestination(self, queue, probability):
         aux = 0
         for destination in queue.network:
-            aux += destination[1]
+            aux += destination['probability']
             if probability <= aux:
-                return destination[0]
+                return destination['target']
         return 'departure'
 
     def eventSchedule(self, eventType, queue1, queue2=None):
